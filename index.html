@@ -1,104 +1,3775 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dayflow HRMS</title>
+
+<title>Dayflow - Human Resource Management System</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f5f7fb;color:#172033}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
-.app{display:flex;min-height:100vh}.sidebar{width:250px;background:#111827;color:#fff;padding:22px 16px;position:fixed;inset:0 auto 0 0}
-.logo{font-size:24px;font-weight:800;margin-bottom:6px}.tag{font-size:12px;color:#9ca3af;margin-bottom:28px}
-.nav button{display:block;width:100%;text-align:left;background:transparent;color:#cbd5e1;padding:12px 14px;border-radius:10px;margin:5px 0}
-.nav button:hover,.nav button.active{background:#2563eb;color:#fff}.main{margin-left:250px;width:calc(100% - 250px);padding:25px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:28px}.user{background:#fff;padding:10px 15px;border-radius:12px;box-shadow:0 2px 12px #0000000d}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 18px #0000000b}.metric{font-size:28px;font-weight:800;margin-top:7px}.muted{color:#6b7280;font-size:13px}.section{margin-top:20px}.section h2{font-size:19px}.two{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:14px}.badge{padding:5px 9px;border-radius:20px;font-size:12px;font-weight:700;background:#e5e7eb}.green{background:#dcfce7;color:#166534}.yellow{background:#fef3c7;color:#92400e}.red{background:#fee2e2;color:#991b1b}.blue{background:#dbeafe;color:#1d4ed8}
-.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form input,.form select,.form textarea{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:9px}.form textarea{grid-column:1/-1;min-height:90px}.full{grid-column:1/-1}.primary{background:#2563eb;color:#fff;padding:11px 16px;border-radius:9px}.danger{background:#dc2626;color:#fff;padding:10px 14px;border-radius:9px}.secondary{background:#e5e7eb;color:#111827;padding:10px 14px;border-radius:9px}.actions{display:flex;gap:8px;flex-wrap:wrap}
-.chat{height:370px;display:flex;flex-direction:column}.messages{flex:1;overflow:auto;background:#f8fafc;padding:15px;border-radius:12px;margin-bottom:10px}.msg{padding:9px 12px;border-radius:12px;margin:7px 0;max-width:80%}.bot{background:#e0e7ff}.me{background:#dbeafe;margin-left:auto}.chatrow{display:flex;gap:8px}.chatrow input{flex:1;padding:11px;border:1px solid #d1d5db;border-radius:9px}
-.login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#172554,#2563eb)}.loginbox{background:#fff;width:390px;padding:32px;border-radius:20px;box-shadow:0 20px 60px #0005}.loginbox h1{margin-top:0}.loginbox input,.loginbox select{width:100%;padding:12px;margin:7px 0;border:1px solid #d1d5db;border-radius:9px}.loginbox button{width:100%;margin-top:10px}.error{color:#dc2626;font-size:13px;margin-top:8px}
-@media(max-width:900px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
-@media(max-width:650px){.sidebar{display:none}.main{margin-left:0;width:100%;padding:15px}.grid{grid-template-columns:1fr}.form{grid-template-columns:1fr}}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f6f6fb;
+    color: #29263d;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background:
+        linear-gradient(
+            135deg,
+            #f5f1ff,
+            #eee9ff,
+            #f9f9ff
+        );
+}
+
+.login-container {
+    width: 950px;
+    max-width: 100%;
+    min-height: 600px;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 25px 70px rgba(70, 45, 130, .15);
+}
+
+
+/* LEFT COMPANY PANEL */
+
+.company-panel {
+    background:
+        linear-gradient(
+            145deg,
+            #6336e8,
+            #4520b5
+        );
+    color: white;
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.company-image {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    background: #8062ef;
+}
+
+.company-panel h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.company-panel p {
+    color: #e8e1ff;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+
+/* LOGIN PANEL */
+
+.login-box {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #6336e8;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    background: #6336e8;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tagline {
+    color: #999;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.login-title {
+    margin-top: 30px;
+    font-size: 28px;
+}
+
+.login-subtitle {
+    color: #888;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #deddea;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    background: white;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: #6336e8;
+    box-shadow: 0 0 0 3px rgba(99,54,232,.08);
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #6336e8;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.primary-btn:hover {
+    background: #5125d0;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #777;
+}
+
+.auth-switch span {
+    color: #6336e8;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   APPLICATION
+========================================================= */
+
+.app {
+    display: none;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 245px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #eeeeee;
+    padding: 25px 15px;
+    z-index: 20;
+}
+
+.sidebar .logo {
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+
+.menu-title {
+    color: #999;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 12px;
+    letter-spacing: 1px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 14px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    color: #68667b;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: #f3efff;
+    color: #6336e8;
+}
+
+.nav-item.active {
+    background: #6336e8;
+    color: white;
+}
+
+.logout {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 20px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    margin-left: 245px;
+    min-height: 100vh;
+}
+
+.topbar {
+    height: 72px;
+    background: white;
+    border-bottom: 1px solid #eeeeee;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 35px;
+    gap: 20px;
+}
+
+.notification {
+    font-size: 20px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user small {
+    display: block;
+    color: #999;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #6336e8;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content {
+    padding: 35px;
+}
+
+.page {
+    animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-title {
+    font-size: 27px;
+    margin-bottom: 6px;
+}
+
+.page-subtitle {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.card-title {
+    color: #777;
+    font-size: 12px;
+}
+
+.card-value {
+    font-size: 27px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.card-small {
+    color: #888;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.green {
+    color: #16a36a;
+}
+
+.orange {
+    color: #e58a19;
+}
+
+.red {
+    color: #e34d5b;
+}
+
+.purple {
+    color: #6336e8;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.quick-card {
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.quick-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(99,54,232,.1);
+}
+
+.quick-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: #f0ecff;
+    color: #6336e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.btn {
+    border: none;
+    background: #6336e8;
+    color: white;
+    border-radius: 8px;
+    padding: 9px 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: .9;
+}
+
+.btn-danger {
+    background: #e34d5b;
+}
+
+.btn-success {
+    background: #16a36a;
+}
+
+.btn-success {
+    background: #16a36a;
+}
+
+.btn-danger {
+    background: #e34d5b;
+}
+
+.btn-secondary {
+    background: #eeeafc;
+    color: #6336e8;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 13px;
+    border-bottom: 1px solid #eeeeee;
+    color: #888;
+    font-size: 11px;
+}
+
+td {
+    padding: 14px 13px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    display: inline-block;
+}
+
+.status.present,
+.status.approved,
+.status.active {
+    color: #128f5c;
+    background: #e5f8ef;
+}
+
+.status.pending {
+    color: #bf7805;
+    background: #fff3d8;
+}
+
+.status.rejected,
+.status.absent {
+    color: #d33f4c;
+    background: #ffe8eb;
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+.attendance-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.attendance-item {
+    padding: 20px;
+    background: #faf9ff;
+    border-radius: 12px;
+}
+
+.attendance-item h4 {
+    color: #888;
+    font-size: 11px;
+}
+
+.attendance-item p {
+    margin-top: 8px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   ATTENDANCE GRAPH
+========================================================= */
+
+.graph-container {
+    width: 100%;
+    height: 320px;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.profile-card {
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.profile-photo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #6336e8;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-upload-label {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 13px;
+    background: #eeeaff;
+    color: #6336e8;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.photo-upload-label input {
+    display: none;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 13px;
+}
+
+.info-label {
+    color: #888;
+}
+
+
+/* =========================================================
+   DOCUMENTS
+========================================================= */
+
+.upload-area {
+    border: 2px dashed #cfc7f7;
+    background: #faf9ff;
+    border-radius: 15px;
+    padding: 35px;
+    text-align: center;
+    cursor: pointer;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.upload-document-btn {
+    margin-top: 12px;
+    border: none;
+    background: #6336e8;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.upload-document-btn:hover {
+    opacity: 0.9;
+}
+
+.upload-area:hover {
+    background: #f4f0ff;
+}
+
+.upload-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.upload-area h3 {
+    margin-bottom: 7px;
+}
+
+.upload-area p {
+    color: #888;
+    font-size: 12px;
+}
+
+.document-list {
+    margin-top: 20px;
+}
+
+.document-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.document-left {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.document-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #eeeaff;
+    color: #6336e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.document-info b {
+    font-size: 13px;
+}
+
+.document-info small {
+    display: block;
+    color: #999;
+    margin-top: 4px;
+}
+
+.document-actions {
+    display: flex;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   HR COPILOT
+========================================================= */
+
+.copilot-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+}
+
+.copilot-topics {
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    padding: 18px;
+}
+
+.copilot-topics h3 {
+    margin-bottom: 15px;
+}
+
+.topic-btn {
+    width: 100%;
+    border: none;
+    background: #f5f2ff;
+    color: #6336e8;
+    padding: 11px;
+    border-radius: 9px;
+    text-align: left;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.topic-btn:hover {
+    background: #eae4ff;
+}
+
+.copilot {
+    height: 570px;
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.copilot-header {
+    background: #6336e8;
+    color: white;
+    padding: 18px;
+}
+
+.copilot-header h2 {
+    font-size: 17px;
+}
+
+.copilot-header p {
+    font-size: 11px;
+    color: #ddd4ff;
+    margin-top: 4px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.message {
+    max-width: 75%;
+    padding: 12px 15px;
+    border-radius: 14px;
+    margin-bottom: 13px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.message.bot {
+    background: #f1eff9;
+    color: #38344c;
+    border-bottom-left-radius: 4px;
+}
+
+.message.user {
+    margin-left: auto;
+    background: #6336e8;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-input {
+    padding: 13px;
+    border-top: 1px solid #eeeeee;
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input input {
+    flex: 1;
+    border: 1px solid #ddd9eb;
+    border-radius: 10px;
+    padding: 12px;
+    outline: none;
+}
+
+.chat-input button {
+    width: 50px;
+    border: none;
+    border-radius: 10px;
+    background: #6336e8;
+    color: white;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-box {
+    width: 500px;
+    max-width: 90%;
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.close {
+    font-size: 24px;
+    cursor: pointer;
+    color: #777;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #29263d;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    z-index: 200;
+    display: none;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1050px) {
+
+    .login-container {
+        grid-template-columns: 1fr;
+        width: 500px;
+    }
+
+    .company-panel {
+        display: none;
+    }
+
+    .cards,
+    .quick-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .attendance-box {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:750px) {
+
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar .logo span,
+    .nav-item span,
+    .menu-title {
+        display: none;
+    }
+
+    .nav-item {
+        justify-content: center;
+    }
+
+    .main {
+        margin-left: 70px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .cards,
+    .quick-grid,
+    .profile-grid,
+    .attendance-box,
+    .copilot-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+}
+
+@media(max-width:500px) {
+
+    .login-box {
+        padding: 25px;
+    }
+
+    .cards,
+    .quick-grid,
+    .attendance-box {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* =========================================================
+   PAYROLL
+========================================================= */
+.payroll-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.payroll-card {
+    background: white;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.payroll-card span {
+    color: #888;
+    font-size: 12px;
+}
+
+.payroll-card h2 {
+    margin-top: 10px;
+    font-size: 23px;
+    color: #29263d;
+}
+
+.payroll-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.payroll-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 13px;
+}
+
+.payroll-row span { color: #777; }
+
+.payroll-row.total {
+    margin-top: 4px;
+    padding-top: 18px;
+    font-size: 15px;
+    border-bottom: none;
+}
+
+.payroll-row.net-pay b {
+    color: #128f5c;
+    font-size: 17px;
+}
+
+.payroll-info-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #faf9ff;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+@media(max-width:1050px) {
+    .payroll-summary { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width:750px) {
+    .payroll-summary, .payroll-layout { grid-template-columns: 1fr; }
+}
+
 </style>
+
 </head>
+
+
 <body>
-<div id="root"></div>
+
+
+<!-- =========================================================
+     LOGIN PAGE
+========================================================= -->
+
+<div class="login-page" id="loginPage">
+
+    <div class="login-container">
+
+
+        <!-- COMPANY SIDE -->
+
+        <div class="company-panel">
+
+            <!-- Company image can be replaced with your own image -->
+
+            <img
+                class="company-image"
+                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=80"
+                alt="Modern workplace"
+            >
+
+            <h1>
+                Dayflow
+            </h1>
+
+            <p>
+                Human Resource Management System
+                designed to keep employees,
+                HR teams and daily work activities
+                perfectly aligned.
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN SIDE -->
+
+        <div class="login-box">
+
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    D
+                </div>
+
+                <span>
+                    Dayflow
+                </span>
+
+            </div>
+
+
+            <div class="tagline">
+                Every workday, perfectly aligned.
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <div id="loginForm">
+
+                <h1 class="login-title">
+                    Welcome Back
+                </h1>
+
+                <p class="login-subtitle">
+                    Sign in to your Dayflow account
+                </p>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Login As
+                    </label>
+
+                    <select id="loginRole">
+
+                        <option value="employee">
+                            Employee
+                        </option>
+
+                        <option value="admin">
+                            HR / Admin
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="login()"
+                >
+                    Sign In
+                </button>
+
+
+                <div class="auth-switch">
+
+                    Don't have an account?
+
+                    <span onclick="showSignup()">
+                        Create Account
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SIGN UP -->
+
+            <div
+                id="signupForm"
+                style="display:none"
+            >
+
+                <h1 class="login-title">
+                    Create Account
+                </h1>
+
+                <p class="login-subtitle">
+                    Create your Dayflow account
+                </p>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Employee ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signupEmployeeId"
+                        placeholder="Enter employee ID"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Enter your full name"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="Enter your email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Create a password"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signupConfirmPassword"
+                        placeholder="Confirm password"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Role
+                    </label>
+
+                    <select id="signupRole">
+
+                        <option value="employee">
+                            Employee
+                        </option>
+
+                        <option value="admin">
+                            HR / Admin
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="createAccount()"
+                >
+                    Create Account
+                </button>
+
+
+                <div class="auth-switch">
+
+                    Already have an account?
+
+                    <span onclick="showLogin()">
+                        Sign In
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div class="app" id="app">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            D
+        </div>
+
+        <span>
+            Dayflow
+        </span>
+
+    </div>
+
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+
+    <div
+        class="nav-item active"
+        onclick="showPage('dashboard',this)"
+    >
+        🏠
+        <span>Dashboard</span>
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="showPage('profile',this)"
+    >
+        👤
+        <span>Profile</span>
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="showPage('attendance',this)"
+    >
+        📅
+        <span>Attendance</span>
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="showPage('leave',this)"
+    >
+        🏖️
+        <span>Leave Requests</span>
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="showPage('payroll',this)"
+    >
+        💰
+        <span>Payroll</span>
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="showPage('documents',this)"
+    >
+        📄
+        <span>Documents</span>
+    </div>
+
+
+    <div
+        class="nav-item"
+        onclick="showPage('copilot',this)"
+    >
+        🤖
+        <span>HR Copilot</span>
+    </div>
+
+
+    <div id="adminMenu">
+
+
+        <div class="menu-title">
+            Administration
+        </div>
+
+
+        <div
+            class="nav-item"
+            onclick="showPage('employees',this)"
+        >
+            👥
+            <span>Employees</span>
+        </div>
+
+
+        <div
+            class="nav-item"
+            onclick="showPage('approvals',this)"
+        >
+            ✅
+            <span>Leave Approvals</span>
+        </div>
+
+
+        <div
+            class="nav-item"
+            onclick="showPage('reports',this)"
+        >
+            📊
+            <span>Reports</span>
+        </div>
+
+    </div>
+
+
+    <div
+        class="nav-item logout"
+        onclick="logout()"
+    >
+        🚪
+        <span>Logout</span>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <div class="topbar">
+
+        <div class="notification">
+            🔔
+        </div>
+
+
+        <div class="user">
+
+            <div
+                class="avatar"
+                id="topAvatar"
+            >
+                U
+            </div>
+
+
+            <div>
+
+                <b id="topName">
+                    User
+                </b>
+
+                <small id="topRole">
+                    Employee
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="content">
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<div id="dashboard" class="page">
+
+
+    <h1 class="page-title">
+
+        Welcome back,
+
+        <span id="welcomeName">
+            User
+        </span>
+
+        👋
+
+    </h1>
+
+
+    <p class="page-subtitle">
+        Here's what's happening with your workday.
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Today's Status
+            </div>
+
+            <div
+                class="card-value green"
+                id="todayStatus"
+            >
+                Not Checked
+            </div>
+
+            <div class="card-small">
+                Attendance status
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Check-In
+            </div>
+
+            <div
+                class="card-value"
+                id="checkInTime"
+            >
+                --
+            </div>
+
+            <div class="card-small">
+                Today
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Working Hours
+            </div>
+
+            <div
+                class="card-value purple"
+                id="workingHours"
+            >
+                00h 00m
+            </div>
+
+            <div class="card-small">
+                Today's hours
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Leave Balance
+            </div>
+
+            <div class="card-value orange">
+                12
+            </div>
+
+            <div class="card-small">
+                Days available
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+
+        <div
+            class="quick-card"
+            onclick="showPage('profile')"
+        >
+
+            <div class="quick-icon">
+                👤
+            </div>
+
+            <b>
+                Profile
+            </b>
+
+            <p class="card-small">
+                Manage your profile
+            </p>
+
+        </div>
+
+
+        <div
+            class="quick-card"
+            onclick="showPage('attendance')"
+        >
+
+            <div class="quick-icon">
+                📅
+            </div>
+
+            <b>
+                Attendance
+            </b>
+
+            <p class="card-small">
+                View attendance graph
+            </p>
+
+        </div>
+
+
+        <div
+            class="quick-card"
+            onclick="openLeaveModal()"
+        >
+
+            <div class="quick-icon">
+                🏖️
+            </div>
+
+            <b>
+                Apply Leave
+            </b>
+
+            <p class="card-small">
+                Submit a request
+            </p>
+
+        </div>
+
+
+        <div
+            class="quick-card"
+            onclick="showPage('copilot')"
+        >
+
+            <div class="quick-icon">
+                🤖
+            </div>
+
+            <b>
+                HR Copilot
+            </b>
+
+            <p class="card-small">
+                Ask your HR doubts
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                Today's Attendance
+            </div>
+
+
+            <button
+                class="btn"
+                id="attendanceButton"
+                onclick="checkInOut()"
+            >
+                Check In
+            </button>
+
+        </div>
+
+
+        <div class="attendance-box">
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    CHECK-IN
+                </h4>
+
+                <p id="dashCheckIn">
+                    --
+                </p>
+
+            </div>
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    CHECK-OUT
+                </h4>
+
+                <p id="dashCheckOut">
+                    --
+                </p>
+
+            </div>
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    TOTAL HOURS
+                </h4>
+
+                <p id="dashTotalHours">
+                    00h 00m
+                </p>
+
+            </div>
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    STATUS
+                </h4>
+
+                <p
+                    class="green"
+                    id="dashStatus"
+                >
+                    Not Checked
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                Weekly Attendance
+            </div>
+
+            <span class="card-small">
+                Working hours
+            </span>
+
+        </div>
+
+
+        <div class="graph-container">
+
+            <canvas id="attendanceChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROFILE
+========================================================= -->
+
+<div
+    id="profile"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        Employee Profile
+    </h1>
+
+    <p class="page-subtitle">
+        View and manage your personal information.
+    </p>
+
+
+    <div class="profile-grid">
+
+
+        <div class="profile-card">
+
+            <div class="profile-photo-wrapper">
+
+
+                <div
+                    class="profile-photo"
+                    id="profilePhoto"
+                >
+                    U
+                </div>
+
+
+                <div>
+
+                    <h2 id="profileName">
+                        User
+                    </h2>
+
+                    <p class="card-small">
+                        Employee Profile
+                    </p>
+
+
+                    <label class="photo-upload-label">
+
+                        📷 Change Photo
+
+                        <input
+                            type="file"
+                            id="profilePhotoInput"
+                            accept="image/*"
+                            onchange="uploadProfilePhoto(event)"
+                        >
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <h3>
+                Personal Details
+            </h3>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Full Name
+                </span>
+
+                <b id="profileFullName">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Email
+                </span>
+
+                <b id="profileEmail">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Employee ID
+                </span>
+
+                <b id="profileEmployeeId">
+                    -
+                </b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Role
+                </span>
+
+                <b id="profileRole">
+                    -
+                </b>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="section-header">
+
+                <h3>
+                    Job Details
+                </h3>
+
+                <button
+                    class="btn"
+                    type="button"
+                    onclick="openJobDetailsModal()"
+                >
+                    Update
+                </button>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Department
+                </span>
+
+                <b id="profileDepartment">
+                    Not Assigned
+                </b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Designation
+                </span>
+
+                <b id="profileDesignation">
+                    Not Assigned
+                </b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Joining Date
+                </span>
+
+                <b id="joiningDate">
+                    -
+                </b>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="section-header">
+
+                <h3>
+                    Account
+                </h3>
+
+                <button
+                    class="btn btn-danger"
+                    type="button"
+                    onclick="toggleAccountStatus()"
+                    id="accountActionBtn"
+                >
+                    Deactivate
+                </button>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Account Status
+                </span>
+
+                <b
+                    id="accountStatus"
+                    class="green"
+                >
+                    Active
+                </b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Profile Photo
+                </span>
+
+                <b>
+                    Customizable
+                </b>
+
+            </div>
+
+        </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Profile Photo
+                </span>
+
+                <b>
+                    Customizable
+                </b>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SALARY UPDATE MODAL
+========================================================= -->
+<div class="modal" id="salaryModal" style="display:none">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>Update Employee Salary</h2>
+            <span class="close" onclick="closeSalaryModal()">×</span>
+        </div>
+
+        <p id="salaryEmployeeName" class="card-small" style="margin-bottom:18px"></p>
+
+        <div class="input-group">
+            <label>Monthly Gross Salary (₹)</label>
+            <input type="number" id="employeeSalaryInput" min="0" step="500" placeholder="Enter monthly salary">
+        </div>
+
+        <button class="btn" type="button" onclick="saveEmployeeSalary()">
+            Save Salary
+        </button>
+    </div>
+</div>
+
+<!-- =========================================================
+     ATTENDANCE PAGE
+========================================================= -->
+
+<div
+    id="attendance"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        Attendance
+    </h1>
+
+    <p class="page-subtitle">
+        Track daily and weekly attendance.
+    </p>
+
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                Today's Attendance
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="checkInOut()"
+            >
+                Check In / Out
+            </button>
+
+        </div>
+
+
+        <div class="attendance-box">
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    CHECK-IN
+                </h4>
+
+                <p id="attCheckIn">
+                    --
+                </p>
+
+            </div>
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    CHECK-OUT
+                </h4>
+
+                <p id="attCheckOut">
+                    --
+                </p>
+
+            </div>
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    STATUS
+                </h4>
+
+                <p
+                    class="green"
+                    id="attStatus"
+                >
+                    Not Checked
+                </p>
+
+            </div>
+
+
+            <div class="attendance-item">
+
+                <h4>
+                    WORKING HOURS
+                </h4>
+
+                <p id="attHours">
+                    00h 00m
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                Weekly Attendance Graph
+            </div>
+
+        </div>
+
+
+        <div class="graph-container">
+
+            <canvas id="attendanceChart2"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-title">
+            Attendance History
+        </div>
+
+        <br>
+
+
+        <div class="table-wrapper">
+
+        <table id="attendanceHistory">
+
+            <tr>
+
+                <th>Date</th>
+
+                <th>Check In</th>
+
+                <th>Check Out</th>
+
+                <th>Total Hours</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     LEAVE
+========================================================= -->
+
+<div
+    id="leave"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        Leave Requests
+    </h1>
+
+    <p class="page-subtitle">
+        Apply for leave and track approval.
+    </p>
+
+
+    <div class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                My Leave Requests
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="openLeaveModal()"
+            >
+                + Apply for Leave
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+        <table id="leaveTable">
+
+            <tr>
+
+                <th>Leave Type</th>
+
+                <th>Date Range</th>
+
+                <th>Days</th>
+
+                <th>Remarks</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PAYROLL
+========================================================= -->
+
+<div id="payroll" class="page" style="display:none">
+
+    <h1 class="page-title">Payroll</h1>
+    <p class="page-subtitle">View your salary and payroll information.</p>
+
+    <div class="payroll-summary">
+        <div class="payroll-card">
+            <span>Monthly Salary</span>
+            <h2 id="payrollMonthlySalary">₹0</h2>
+        </div>
+
+        <div class="payroll-card">
+            <span>Basic Salary</span>
+            <h2 id="payrollBasicSalary">₹0</h2>
+        </div>
+
+        <div class="payroll-card">
+            <span>Allowances</span>
+            <h2 id="payrollAllowances">₹0</h2>
+        </div>
+
+        <div class="payroll-card">
+            <span>Estimated Net Salary</span>
+            <h2 id="payrollNetSalary">₹0</h2>
+        </div>
+    </div>
+
+    <div class="payroll-layout">
+
+        <div class="section">
+            <div class="section-title">Salary Breakdown</div>
+
+            <div class="payroll-row">
+                <span>Basic Salary</span>
+                <b id="salaryBasic">₹0</b>
+            </div>
+
+            <div class="payroll-row">
+                <span>House Rent Allowance (HRA)</span>
+                <b id="salaryHRA">₹0</b>
+            </div>
+
+            <div class="payroll-row">
+                <span>Other Allowances</span>
+                <b id="salaryOtherAllowance">₹0</b>
+            </div>
+
+            <div class="payroll-row total">
+                <span>Gross Salary</span>
+                <b id="salaryGross">₹0</b>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Deductions & Net Pay</div>
+
+            <div class="payroll-row">
+                <span>Provident Fund / Other Deductions</span>
+                <b id="salaryDeductions">₹0</b>
+            </div>
+
+            <div class="payroll-row total net-pay">
+                <span>Estimated Net Salary</span>
+                <b id="salaryNetPay">₹0</b>
+            </div>
+
+            <div class="payroll-info-box">
+                <b>Salary Status: </b>
+                <span id="payrollStatus">Not Assigned</span>
+                <br><br>
+                <small>Your salary details are managed by HR / Admin.</small>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DOCUMENTS
+========================================================= -->
+
+<div
+    id="documents"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        Documents
+    </h1>
+
+    <p class="page-subtitle">
+        Upload and manage your HR documents.
+    </p>
+
+
+    <div class="section">
+
+
+        <label
+            class="upload-area"
+            for="documentInput"
+        >
+
+            <div class="upload-icon">
+                📄
+            </div>
+
+            <h3>
+                Upload Document
+            </h3>
+
+            <p>
+                Select PDF, DOC, DOCX, JPG or PNG files
+            </p>
+
+            <button
+                type="button"
+                class="upload-document-btn"
+                onclick="document.getElementById('documentInput').click(); event.preventDefault();"
+            >
+                ⬆ Upload Document
+            </button>
+
+            <input
+                type="file"
+                id="documentInput"
+                multiple
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                style="display:none"
+                onchange="uploadDocuments(event)"
+            >
+
+        </label>
+
+
+        <div
+            class="document-list"
+            id="documentList"
+        >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HR COPILOT
+========================================================= -->
+
+<div
+    id="copilot"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        HR Copilot 🤖
+    </h1>
+
+    <p class="page-subtitle">
+        Ask questions about attendance, leave,
+        payroll, documents and HR processes.
+    </p>
+
+
+    <div class="copilot-layout">
+
+
+        <div class="copilot-topics">
+
+            <h3>
+                Quick Questions
+            </h3>
+
+
+            <button
+                class="topic-btn"
+                onclick="askCopilot('How can I apply for leave?')"
+            >
+                🏖️ How do I apply for leave?
+            </button>
+
+
+            <button
+                class="topic-btn"
+                onclick="askCopilot('How does attendance work?')"
+            >
+                📅 How does attendance work?
+            </button>
+
+
+            <button
+                class="topic-btn"
+                onclick="askCopilot('How can I upload documents?')"
+            >
+                📄 How do I upload documents?
+            </button>
+
+
+            <button
+                class="topic-btn"
+                onclick="askCopilot('How can I change my profile photo?')"
+            >
+                👤 Change profile photo
+            </button>
+
+
+            <button
+                class="topic-btn"
+                onclick="askCopilot('Who approves my leave?')"
+            >
+                ✅ Who approves leave?
+            </button>
+
+
+            <button
+                class="topic-btn"
+                onclick="askCopilot('Where can I find payroll information?')"
+            >
+                💰 Payroll information
+            </button>
+
+        </div>
+
+
+        <div class="copilot">
+
+
+            <div class="copilot-header">
+
+                <h2>
+                    Dayflow HR Copilot
+                </h2>
+
+                <p>
+                    Your workplace assistant
+                </p>
+
+            </div>
+
+
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            >
+
+                <div class="message bot">
+
+                    Hello! 👋 I'm Dayflow HR Copilot.
+
+                    <br><br>
+
+                    You can ask me about
+                    <b>attendance, leave, payroll,
+                    documents, profiles and HR processes.</b>
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="copilotInput"
+                    placeholder="Ask your HR doubt..."
+                    onkeydown="handleCopilotKey(event)"
+                >
+
+
+                <button
+                    onclick="sendCopilotMessage()"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN EMPLOYEES
+========================================================= -->
+
+<div
+    id="employees"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        Employee Management
+    </h1>
+
+    <p class="page-subtitle">
+        Manage registered employees.
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Total Employees
+            </div>
+
+            <div
+                class="card-value purple"
+                id="employeeCount"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Active Employees
+            </div>
+
+            <div class="card-value green">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Leave Requests
+            </div>
+
+            <div
+                class="card-value orange"
+                id="adminLeaveCount"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                System
+            </div>
+
+            <div class="card-value">
+                Active
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-title">
+            Employee List
+        </div>
+
+        <br>
+
+
+        <div class="table-wrapper">
+
+        <table id="employeeTable">
+
+            <tr>
+
+                <th>
+                    Employee ID
+                </th>
+
+                <th>
+                    Employee
+                </th>
+
+                <th>
+                    Email
+                </th>
+
+                <th>
+                    Role
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+            </tr>
+
+        </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     APPROVALS
+========================================================= -->
+
+<div
+    id="approvals"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        Leave Approvals
+    </h1>
+
+    <p class="page-subtitle">
+        Review employee leave requests.
+    </p>
+
+
+    <div class="section">
+
+        <div class="table-wrapper">
+
+        <table id="approvalTable">
+
+            <tr>
+
+                <th>
+                    Employee
+                </th>
+
+                <th>
+                    Leave Type
+                </th>
+
+                <th>
+                    Date Range
+                </th>
+
+                <th>
+                    Remarks
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+        </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     REPORTS
+========================================================= -->
+
+<div
+    id="reports"
+    class="page"
+    style="display:none"
+>
+
+
+    <h1 class="page-title">
+        HR Reports & Analytics
+    </h1>
+
+    <p class="page-subtitle">
+        Overview of employee activity.
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Employees
+            </div>
+
+            <div
+                class="card-value purple"
+                id="reportEmployees"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Leave Requests
+            </div>
+
+            <div
+                class="card-value orange"
+                id="reportLeaves"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Documents
+            </div>
+
+            <div
+                class="card-value green"
+                id="reportDocuments"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Attendance
+            </div>
+
+            <div class="card-value">
+                Active
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-title">
+            HR System Overview
+        </div>
+
+        <br>
+
+        <p class="card-small">
+            HR can monitor employees, leave requests,
+            attendance and employee documents.
+        </p>
+
+    </div>
+
+</div>
+
+
+    </div>
+
+</main>
+
+</div>
+
+
+<!-- =========================================================
+     JOB DETAILS MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="jobDetailsModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                Update Job Details
+            </h2>
+
+            <span
+                class="close"
+                onclick="closeJobDetailsModal()"
+            >
+                ×
+            </span>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Department
+            </label>
+
+            <input
+                type="text"
+                id="jobDepartment"
+                placeholder="Enter department"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Designation
+            </label>
+
+            <input
+                type="text"
+                id="jobDesignation"
+                placeholder="Enter designation"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            type="button"
+            onclick="saveJobDetails()"
+        >
+            Save Changes
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     LEAVE MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="leaveModal"
+>
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Apply for Leave
+            </h2>
+
+            <span
+                class="close"
+                onclick="closeLeaveModal()"
+            >
+                ×
+            </span>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Leave Type
+            </label>
+
+            <select id="leaveType">
+
+                <option>
+                    Paid Leave
+                </option>
+
+                <option>
+                    Sick Leave
+                </option>
+
+                <option>
+                    Unpaid Leave
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Start Date
+            </label>
+
+            <input
+                type="date"
+                id="startDate"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                End Date
+            </label>
+
+            <input
+                type="date"
+                id="endDate"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Remarks
+            </label>
+
+            <textarea
+                id="leaveRemarks"
+                rows="3"
+                placeholder="Enter reason for leave"
+            ></textarea>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="submitLeave()"
+        >
+            Submit Request
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
 <script>
-const state={
- user:null, page:'dashboard',
- employees:[
-  {id:'ADM001',name:'Dayflow Admin',email:'admin@dayflow.com',password:'admin123',role:'ADMIN',dept:'Human Resources',designation:'HR Manager',phone:'9876543210',address:'Bengaluru',salary:80000,allowance:10000,deduction:5000,leave:18,sick:8},
-  {id:'EMP001',name:'Lavanya',email:'lavanya@dayflow.com',password:'emp123',role:'EMPLOYEE',dept:'Engineering',designation:'Software Engineer',phone:'9876543210',address:'Bengaluru',salary:50000,allowance:10000,deduction:5000,leave:18,sick:8},
-  {id:'EMP002',name:'Anitha',email:'anitha@dayflow.com',password:'emp123',role:'EMPLOYEE',dept:'Finance',designation:'Finance Executive',phone:'',address:'',salary:45000,allowance:8000,deduction:4000,leave:18,sick:8}
- ],
- attendance:[], leaves:[], notifications:[]
-};
-const root=document.getElementById('root');
-function fmt(n){return Number(n).toLocaleString('en-IN',{maximumFractionDigits:0})}
-function emp(){return state.user}
-function employee(id){return state.employees.find(x=>x.id===id)}
-function notify(id,msg){state.notifications.push({id,msg,time:new Date().toLocaleString(),read:false})}
-function nav(items){return items.map(x=>`<button class="${state.page===x[0]?'active':''}" onclick="go('${x[0]}')">${x[1]}</button>`).join('')}
-function layout(content){
- let admin=emp().role==='ADMIN';
- root.innerHTML=`<div class="app"><aside class="sidebar">
- <div class="logo">⚡ Dayflow</div><div class="tag">Human Resource Management System</div>
- <div class="nav">${admin?nav([['dashboard','📊 Command Center'],['employees','👥 Employees'],['attendance','📅 Attendance'],['leaves','🏖️ Leave Approval'],['payroll','💰 Payroll'],['wellbeing','❤️ Wellbeing'],['intelligence','🧠 Leave Intelligence'],['analytics','📈 Analytics'],['copilot','🤖 AI HR Copilot'],['notifications','🔔 Notifications']]):nav([['dashboard','🏠 Dashboard'],['profile','👤 My Profile'],['attendance','📅 Attendance'],['leaves','🏖️ My Leave'],['payroll','💰 Salary Slip'],['wellbeing','❤️ Wellbeing'],['intelligence','🧠 Leave Intelligence'],['copilot','🤖 AI Assistant'],['notifications','🔔 Notifications']])}
- <button onclick="logout()" style="margin-top:20px;color:#fca5a5">🚪 Logout</button></div></aside>
- <main class="main"><div class="top"><h1>${title()}</h1><div class="user">${emp().name} · <b>${emp().role}</b></div></div>${content}</main></div>`;
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let users =
+    JSON.parse(
+        localStorage.getItem("dayflowUsers")
+    ) || [];
+
+let leaveRequests =
+    JSON.parse(
+        localStorage.getItem("dayflowLeaves")
+    ) || [];
+
+let attendanceData =
+    JSON.parse(
+        localStorage.getItem("dayflowAttendance")
+    ) || {};
+
+let documentsData =
+    JSON.parse(
+        localStorage.getItem("dayflowDocuments")
+    ) || {};
+
+let currentUser = null;
+
+let currentRole = null;
+
+let attendanceTimer = null;
+
+
+/* =========================================================
+   USER DATA DEFAULTS
+========================================================= */
+
+users = users.map(
+    user => ({
+        ...user,
+        department: user.department || "Not Assigned",
+        designation: user.designation || "Not Assigned",
+        status: user.status || "Active"
+    })
+);
+
+localStorage.setItem(
+    "dayflowUsers",
+    JSON.stringify(users)
+);
+
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(
+        () => {
+            toast.style.display = "none";
+        },
+        2500
+    );
 }
-function title(){let m={dashboard:'HR Dashboard',employees:'Employee Management',attendance:'Smart Attendance',leaves:'Leave Management',payroll:'Payroll & Salary',wellbeing:'Employee Wellbeing Radar',intelligence:'Leave Intelligence',analytics:'Analytics & Reports',copilot:'AI HR Copilot',notifications:'Notifications',profile:'My Profile'};return m[state.page]||'Dayflow'}
-function go(p){state.page=p;render()}
-function render(){if(!state.user){login();return} let f={dashboard:dashboard,employees:employees,attendance:attendance,leaves:leaves,payroll:payroll,wellbeing:wellbeing,intelligence:intelligence,analytics:analytics,copilot:copilot,notifications:notifications,profile:profile};layout(f[state.page]())}
-function login(){
- root.innerHTML=`<div class="login"><div class="loginbox"><h1>⚡ Dayflow</h1><p class="muted">Every workday, perfectly aligned.</p>
- <input id="email" placeholder="Email"><input id="pass" type="password" placeholder="Password">
- <button class="primary" onclick="doLogin()">Sign In</button><button class="secondary" onclick="signup()">Create Employee Account</button>
- <p class="muted">Demo Admin: admin@dayflow.com / admin123<br>Demo Employee: lavanya@dayflow.com / emp123</p><div id="err" class="error"></div></div></div>`;
+
+
+/* =========================================================
+   SIGN UP / LOGIN
+========================================================= */
+
+function showSignup() {
+
+    document.getElementById("loginForm")
+        .style.display = "none";
+
+    document.getElementById("signupForm")
+        .style.display = "block";
 }
-function doLogin(){let e=state.employees.find(x=>x.email.toLowerCase()===document.getElementById('email').value.toLowerCase()&&x.password===document.getElementById('pass').value);if(!e){document.getElementById('err').textContent='Invalid email or password.';return}state.user=e;state.page='dashboard';notify(e.id,'Successful login recorded.');render()}
-function signup(){let name=prompt('Full name:');if(!name)return;let email=prompt('Email:');if(!email)return;let pass=prompt('Password (minimum 6 characters):');if(!pass||pass.length<6){alert('Password must have at least 6 characters.');return}if(state.employees.some(x=>x.email.toLowerCase()===email.toLowerCase())){alert('Email already registered.');return}let id='EMP'+String(state.employees.length).padStart(3,'0');let e={id,name,email,password:pass,role:'EMPLOYEE',dept:'General',designation:'Employee',phone:'',address:'',salary:30000,allowance:5000,deduction:3000,leave:18,sick:8};state.employees.push(e);alert('Account created. You can now sign in.');}
-function dashboard(){
- if(emp().role==='ADMIN'){
-  let emps=state.employees.filter(x=>x.role==='EMPLOYEE'), today=state.attendance.filter(a=>a.date===new Date().toLocaleDateString());
-  return `<div class="grid"><div class="card">👥<div class="muted">Employees</div><div class="metric">${emps.length}</div></div><div class="card">📅<div class="muted">Present Today</div><div class="metric">${today.filter(a=>a.status==='PRESENT').length}</div></div><div class="card">🏖️<div class="muted">Pending Leave</div><div class="metric">${state.leaves.filter(x=>x.status==='PENDING').length}</div></div><div class="card">💰<div class="muted">Monthly Payroll</div><div class="metric">₹${fmt(emps.reduce((s,x)=>s+x.salary+x.allowance-x.deduction,0))}</div></div></div>
-  <div class="two section"><div class="card"><h2>Workforce Overview</h2>${emps.map(e=>`<p><b>${e.name}</b> · ${e.dept} <span class="badge ${wellScore(e)>2?'red':'green'}">${wellScore(e)>2?'Attention':'Healthy'}</span></p>`).join('')}</div><div class="card"><h2>Quick Actions</h2><div class="actions"><button class="primary" onclick="go('employees')">Manage Employees</button><button class="secondary" onclick="go('leaves')">Review Leaves</button><button class="secondary" onclick="go('analytics')">View Reports</button></div></div></div>`;
- }
- return `<div class="grid"><div class="card">👤<div class="muted">Profile</div><div class="metric">${emp().name}</div></div><div class="card">📅<div class="muted">Today</div><div class="metric">${todayStatus()}</div></div><div class="card">🏖️<div class="muted">Paid Leave</div><div class="metric">${emp().leave}</div></div><div class="card">💰<div class="muted">Net Salary</div><div class="metric">₹${fmt(emp().salary+emp().allowance-emp().deduction)}</div></div></div><div class="card section"><h2>Recent Alerts</h2><p>${state.notifications.filter(n=>n.id===emp().id).slice(-3).map(n=>n.msg).join('<br>')||'No new alerts.'}</p></div>`;
+
+
+function showLogin() {
+
+    document.getElementById("signupForm")
+        .style.display = "none";
+
+    document.getElementById("loginForm")
+        .style.display = "block";
 }
-function todayStatus(){let a=state.attendance.find(x=>x.empId===emp().id&&x.date===new Date().toLocaleDateString());return a?a.status:'Not Checked In'}
-function attendance(){
- if(emp().role==='ADMIN')return `<div class="card"><h2>All Attendance Records</h2>${state.attendance.length?`<table class="table"><tr><th>Employee</th><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr>${state.attendance.map(a=>`<tr><td>${employee(a.empId).name}</td><td>${a.date}</td><td>${a.in}</td><td>${a.out||'-'}</td><td>${a.hours||0}</td><td><span class="badge blue">${a.status}</span></td></tr>`).join('')}</table>`:'No records yet.'}</div>`;
- let a=state.attendance.find(x=>x.empId===emp().id&&x.date===new Date().toLocaleDateString());
- return `<div class="grid"><div class="card"><div class="muted">Today's Status</div><div class="metric">${a?a.status:'Absent'}</div></div><div class="card"><div class="muted">Working Hours</div><div class="metric">${a?a.hours||0:0}</div></div><div class="card"><div class="muted">Check In</div><div class="metric" style="font-size:18px">${a?a.in:'-'}</div></div><div class="card"><div class="muted">Check Out</div><div class="metric" style="font-size:18px">${a?a.out||'-':'-'}</div></div></div><div class="card section"><div class="actions"><button class="primary" onclick="checkIn()">Check In</button><button class="secondary" onclick="checkOut()">Check Out</button></div><h2>Weekly Attendance</h2>${weeklyTable()}</div>`;
+
+
+function createAccount() {
+
+    const employeeId =
+        document.getElementById(
+            "signupEmployeeId"
+        ).value.trim();
+
+    const name =
+        document.getElementById(
+            "signupName"
+        ).value.trim();
+
+    const email =
+        document.getElementById(
+            "signupEmail"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "signupPassword"
+        ).value;
+
+    const confirmPassword =
+        document.getElementById(
+            "signupConfirmPassword"
+        ).value;
+
+    const role =
+        document.getElementById(
+            "signupRole"
+        ).value;
+
+
+    if (
+        !employeeId ||
+        !name ||
+        !email ||
+        !password ||
+        !confirmPassword
+    ) {
+
+        showToast(
+            "Please fill all required fields."
+        );
+
+        return;
+    }
+
+
+    if (password.length < 6) {
+
+        showToast(
+            "Password must contain at least 6 characters."
+        );
+
+        return;
+    }
+
+
+    if (password !== confirmPassword) {
+
+        showToast(
+            "Passwords do not match."
+        );
+
+        return;
+    }
+
+
+    if (
+        users.some(
+            u =>
+                u.email.toLowerCase()
+                ===
+                email.toLowerCase()
+        )
+    ) {
+
+        showToast(
+            "Email is already registered."
+        );
+
+        return;
+    }
+
+
+    if (
+        users.some(
+            u =>
+                u.employeeId.toLowerCase()
+                ===
+                employeeId.toLowerCase()
+        )
+    ) {
+
+        showToast(
+            "Employee ID already exists."
+        );
+
+        return;
+    }
+
+
+    const newUser = {
+
+        employeeId,
+        name,
+        email,
+        password,
+        role,
+
+        department: "Not Assigned",
+
+        designation: "Not Assigned",
+
+        status: "Active",
+
+        joiningDate:
+            new Date()
+                .toLocaleDateString(),
+
+        photo: ""
+
+    };
+
+
+    users.push(newUser);
+
+
+    localStorage.setItem(
+        "dayflowUsers",
+        JSON.stringify(users)
+    );
+
+
+    showToast(
+        "Account created successfully."
+    );
+
+
+    document.getElementById(
+        "signupEmployeeId"
+    ).value = "";
+
+    document.getElementById(
+        "signupName"
+    ).value = "";
+
+    document.getElementById(
+        "signupEmail"
+    ).value = "";
+
+    document.getElementById(
+        "signupPassword"
+    ).value = "";
+
+    document.getElementById(
+        "signupConfirmPassword"
+    ).value = "";
+
+
+    setTimeout(
+        showLogin,
+        800
+    );
+
 }
-function checkIn(){if(state.attendance.some(a=>a.empId===emp().id&&a.date===new Date().toLocaleDateString()))return alert('Already checked in today.');state.attendance.push({empId:emp().id,date:new Date().toLocaleDateString(),in:new Date().toLocaleTimeString(),hours:0,status:'PRESENT'});notify(emp().id,'Smart check-in recorded.');render()}
-function checkOut(){let a=state.attendance.find(x=>x.empId===emp().id&&x.date===new Date().toLocaleDateString());if(!a)return alert('Check in first.');if(a.out)return alert('Already checked out.');a.out=new Date().toLocaleTimeString();a.hours=8;notify(emp().id,'Check-out recorded.');render()}
-function weeklyTable(){return `<table class="table"><tr><th>Date</th><th>Status</th><th>Hours</th></tr>${[...Array(7)].map((_,i)=>{let d=new Date(Date.now()-(6-i)*86400000).toLocaleDateString();let a=state.attendance.find(x=>x.empId===emp().id&&x.date===d);return `<tr><td>${d}</td><td>${a?a.status:'ABSENT / NO RECORD'}</td><td>${a?a.hours:0}</td></tr>`}).join('')}</table>`}
-function employees(){return `<div class="card"><div class="actions"><button class="primary" onclick="addEmp()">+ Add Employee</button></div><table class="table"><tr><th>ID</th><th>Name</th><th>Department</th><th>Designation</th><th>Email</th><th>Salary</th><th>Action</th></tr>${state.employees.map(e=>`<tr><td>${e.id}</td><td>${e.name}</td><td>${e.dept}</td><td>${e.designation}</td><td>${e.email}</td><td>₹${fmt(e.salary)}</td><td><button class="secondary" onclick="viewEmp('${e.id}')">View</button></td></tr>`).join('')}</table></div>`}
-function addEmp(){let name=prompt('Name:');if(!name)return;let email=prompt('Email:');let dept=prompt('Department:','Engineering');let designation=prompt('Designation:','Employee');let salary=Number(prompt('Basic salary:','30000'));let id='EMP'+String(state.employees.length).padStart(3,'0');state.employees.push({id,name,email,password:'welcome123',role:'EMPLOYEE',dept,designation,phone:'',address:'',salary,allowance:5000,deduction:2000,leave:18,sick:8});alert('Employee added. Temporary password: welcome123');render()}
-function viewEmp(id){let e=employee(id);alert(`Employee Profile\n\nID: ${e.id}\nName: ${e.name}\nEmail: ${e.email}\nDepartment: ${e.dept}\nDesignation: ${e.designation}\nPhone: ${e.phone}\nAddress: ${e.address}\nSalary: ₹${fmt(e.salary)}\nPaid Leave: ${e.leave}\nSick Leave: ${e.sick}`)}
-function profile(){let e=emp();return `<div class="card"><h2>Complete Employee Profile</h2><div class="form"><label>Name<input value="${e.name}" disabled></label><label>Email<input value="${e.email}" disabled></label><label>Employee ID<input value="${e.id}" disabled></label><label>Department<input value="${e.dept}" disabled></label><label>Designation<input value="${e.designation}" disabled></label><label>Phone<input id="phone" value="${e.phone}"></label><label class="full">Address<input id="address" value="${e.address}"></label><button class="primary full" onclick="saveProfile()">Save Profile</button></div></div>`}
-function saveProfile(){emp().phone=document.getElementById('phone').value;emp().address=document.getElementById('address').value;notify(emp().id,'Profile updated successfully.');alert('Profile saved.');render()}
-function leaves(){
- if(emp().role==='ADMIN')return `<div class="card"><h2>Pending Leave Requests</h2>${state.leaves.filter(x=>x.status==='PENDING').map(r=>`<div style="padding:14px;border-bottom:1px solid #eee"><b>${employee(r.empId).name}</b> · ${r.type} · ${r.start} to ${r.end}<br><span class="muted">${r.reason}</span><div class="actions" style="margin-top:8px"><button class="primary" onclick="processLeave(${r.id},'APPROVED')">Approve</button><button class="danger" onclick="processLeave(${r.id},'REJECTED')">Reject</button></div></div>`).join('')||'No pending requests.'}</div>`;
- return `<div class="two"><div class="card"><h2>Apply for Leave</h2><div class="form"><select id="ltype"><option>PAID</option><option>SICK</option><option>UNPAID</option></select><input id="start" type="date"><input id="end" type="date"><textarea id="reason" placeholder="Remarks"></textarea><button class="primary full" onclick="applyLeave()">Submit Request</button></div></div><div class="card"><h2>My Requests</h2>${state.leaves.filter(x=>x.empId===emp().id).map(r=>`<p>${r.type} · ${r.start} → ${r.end} <span class="badge ${r.status==='APPROVED'?'green':r.status==='REJECTED'?'red':'yellow'}">${r.status}</span></p>`).join('')||'No requests.'}</div></div>`}
-function applyLeave(){let s=document.getElementById('start').value,e=document.getElementById('end').value;if(!s||!e)return alert('Select dates.');let id=Date.now();state.leaves.push({id,empId:emp().id,type:document.getElementById('ltype').value,start:s,end:e,reason:document.getElementById('reason').value,status:'PENDING'});notify(emp().id,'Leave request submitted for HR approval.');notify('ADM001',`New leave request from ${emp().name}.`);alert('Leave request submitted.');render()}
-function processLeave(id,status){let r=state.leaves.find(x=>x.id===id);r.status=status;if(status==='APPROVED'){let e=employee(r.empId);if(r.type==='PAID')e.leave=Math.max(0,e.leave+days(r.start,r.end)*-1);if(r.type==='SICK')e.sick=Math.max(0,e.sick+days(r.start,r.end)*-1)}notify(r.empId,`Your leave request has been ${status.toLowerCase()}.`);render()}
-function days(a,b){return Math.max(1,Math.round((new Date(b)-new Date(a))/86400000)+1)}
-function payroll(){
- if(emp().role==='ADMIN')return `<div class="card"><h2>Payroll Control</h2><table class="table"><tr><th>Employee</th><th>Basic</th><th>Allowance</th><th>Deduction</th><th>Net</th><th>Action</th></tr>${state.employees.filter(e=>e.role==='EMPLOYEE').map(e=>`<tr><td>${e.name}</td><td>₹${fmt(e.salary)}</td><td>₹${fmt(e.allowance)}</td><td>₹${fmt(e.deduction)}</td><td><b>₹${fmt(e.salary+e.allowance-e.deduction)}</b></td><td><button class="secondary" onclick="salaryEdit('${e.id}')">Edit</button></td></tr>`).join('')}</table></div>`;
- let e=emp(),gross=e.salary+e.allowance,net=gross-e.deduction;return `<div class="card"><h2>Monthly Salary Slip · ${new Date().toLocaleString('en',{month:'long',year:'numeric'})}</h2><p><b>${e.name}</b> · ${e.id}</p><table class="table"><tr><td>Basic Salary</td><td>₹${fmt(e.salary)}</td></tr><tr><td>Allowance</td><td>₹${fmt(e.allowance)}</td></tr><tr><td>Gross Salary</td><td>₹${fmt(gross)}</td></tr><tr><td>Deduction</td><td>₹${fmt(e.deduction)}</td></tr><tr><th>NET SALARY</th><th>₹${fmt(net)}</th></tr></table><button class="primary" onclick="window.print()">Print / Save Salary Slip</button></div>`}
-function salaryEdit(id){let e=employee(id);e.salary=Number(prompt('Basic salary:',e.salary));e.allowance=Number(prompt('Allowance:',e.allowance));e.deduction=Number(prompt('Deduction:',e.deduction));notify(id,'Salary structure updated by HR.');render()}
-function wellScore(e){let late=state.attendance.filter(a=>a.empId===e.id&&a.in).length;return (e.leave<5?2:0)+(late>10?1:0)}
-function wellbeing(){if(emp().role==='ADMIN')return `<div class="grid">${state.employees.filter(e=>e.role==='EMPLOYEE').map(e=>`<div class="card"><h2>${e.name}</h2><div class="metric">${wellScore(e)>2?'⚠️ Attention':'✅ Healthy'}</div><p class="muted">Leave balance: ${e.leave} · Attendance records: ${state.attendance.filter(a=>a.empId===e.id).length}</p><p>${wellScore(e)>2?'Recommend manager check-in and workload review.':'No significant work-pattern alert detected.'}</p></div>`).join('')}</div>`;return `<div class="card"><h2>❤️ Your Wellbeing Radar</h2><div class="metric">${wellScore(emp())>2?'⚠️ Attention Required':'✅ Normal'}</div><p>We monitor attendance patterns, leave utilization and work-pattern indicators.</p><p><b>Recommendation:</b> ${wellScore(emp())>2?'Consider discussing workload with your manager.':'Maintain healthy work and leave habits.'}</p></div>`}
-function intelligence(){let e=emp(),req=state.leaves.filter(r=>r.empId===e.id),used=18-e.leave;return `<div class="grid"><div class="card"><div class="muted">Paid Leave Used</div><div class="metric">${used}</div></div><div class="card"><div class="muted">Remaining</div><div class="metric">${e.leave}</div></div><div class="card"><div class="muted">Requests</div><div class="metric">${req.length}</div></div><div class="card"><div class="muted">Team Availability</div><div class="metric">${teamAvailability()}%</div></div></div><div class="card section"><h2>🧠 Intelligence</h2><p>${used>=12?'High leave utilization detected. Monitor remaining balance.':used>=6?'Moderate leave utilization. Usage is within a normal range.':'Low leave utilization. Employee may be under-utilizing available leave.'}</p><p><b>Team recommendation:</b> ${teamAvailability()<60?'Review workload before approving additional leave.':'Team availability is healthy.'}</p></div>`}
-function teamAvailability(){let total=state.employees.filter(e=>e.role==='EMPLOYEE').length;if(!total)return 100;let today=new Date().toISOString().slice(0,10);let on=state.leaves.filter(r=>r.status==='APPROVED'&&r.start<=today&&r.end>=today).length;return Math.round((total-on)/total*100)}
-function analytics(){let emps=state.employees.filter(e=>e.role==='EMPLOYEE'),pending=state.leaves.filter(r=>r.status==='PENDING').length,approved=state.leaves.filter(r=>r.status==='APPROVED').length;let payroll=emps.reduce((s,e)=>s+e.salary+e.allowance-e.deduction,0);return `<div class="grid"><div class="card"><div class="muted">Employees</div><div class="metric">${emps.length}</div></div><div class="card"><div class="muted">Leave Requests</div><div class="metric">${state.leaves.length}</div></div><div class="card"><div class="muted">Approval Rate</div><div class="metric">${state.leaves.length?Math.round(approved/state.leaves.length*100):0}%</div></div><div class="card"><div class="muted">Monthly Payroll</div><div class="metric">₹${fmt(payroll)}</div></div></div><div class="two section"><div class="card"><h2>Department Report</h2>${[...new Set(emps.map(e=>e.dept))].map(d=>`<p><b>${d}</b> — ${emps.filter(e=>e.dept===d).length} employees</p>`).join('')}</div><div class="card"><h2>Leave Pipeline</h2><p>Pending: ${pending}</p><p>Approved: ${approved}</p><p>Rejected: ${state.leaves.filter(r=>r.status==='REJECTED').length}</p></div></div>`}
-function copilot(){return `<div class="card chat"><div class="messages" id="messages"><div class="msg bot">Hello ${emp().name}! I am the Dayflow AI HR Copilot. Ask me about attendance, leave, salary, wellbeing, employees, approvals or reports.</div></div><div class="chatrow"><input id="q" placeholder="Ask HR anything..." onkeydown="if(event.key==='Enter')ask()"><button class="primary" onclick="ask()">Ask</button></div></div>`}
-function ask(){let q=document.getElementById('q').value.trim();if(!q)return;let box=document.getElementById('messages');box.innerHTML+=`<div class="msg me">${q}</div>`;let x=q.toLowerCase(),ans;if(x.includes('attendance'))ans=`Your attendance status today is ${todayStatus()}.`;else if(x.includes('leave'))ans=`You have ${emp().leave} paid leave and ${emp().sick} sick leave remaining.`;else if(x.includes('salary')||x.includes('payroll'))ans=`Your estimated net monthly salary is ₹${fmt(emp().salary+emp().allowance-emp().deduction)}.`;else if(x.includes('wellbeing')||x.includes('stress')||x.includes('workload'))ans=wellScore(emp())>2?'Your work pattern needs attention. Consider a manager check-in.':'No significant wellbeing alert is detected.';else if(x.includes('employee')&&emp().role==='ADMIN')ans=`There are ${state.employees.filter(e=>e.role==='EMPLOYEE').length} employees in Dayflow.`;else if(x.includes('pending'))ans=`There are ${state.leaves.filter(r=>r.status==='PENDING').length} pending leave requests.`;else if(x.includes('report')||x.includes('dashboard'))ans='Open Analytics or the HR Command Center for workforce metrics and recommendations.';else ans='I can help with attendance, leave, salary, wellbeing, employees, approvals and reports.';box.innerHTML+=`<div class="msg bot">${ans}</div>`;box.scrollTop=box.scrollHeight;document.getElementById('q').value=''}
-function notifications(){let ns=state.notifications.filter(n=>n.id===emp().id);return `<div class="card"><h2>🔔 Notifications</h2>${ns.length?ns.slice().reverse().map(n=>`<div style="padding:13px;border-bottom:1px solid #eee"><b>${n.msg}</b><div class="muted">${n.time}</div></div>`).join(''):'No notifications.'}</div>`}
-function logout(){state.user=null;login()}
-render();
-</script>
-</body>
-</html>
+
+
+function login() {
+
+    const email =
+        document.getElementById(
+            "loginEmail"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+    const role =
+        document.getElementById(
+            "loginRole"
+        ).value;
+
+
+    const user =
+        users.find(
+            u =>
+                u.email.toLowerCase()
+                ===
+                email.toLowerCase()
+                &&
+                u.password === password
+                &&
+                u.role === role
+        );
+
+
+    if (!user) {
+
+        showToast(
+            "Invalid email, password or role."
+        );
+
+        return;
+    }
+
+
+    if (user.status === "Inactive") {
+
+        showToast(
+            "Your account is inactive. Please contact HR / Admin."
+        );
+
+        return;
+    }
+
+
+    currentUser = user;
+
+    currentRole = user.role;
+
+
+    document.getElementById(
+        "loginPage"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "app"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "topName"
+    ).innerText =
+        user.name;
+
+
+    document.getElementById(
+        "welcomeName"
+    ).innerText =
+        user.name;
+
+
+    document.getElementById(
+        "topRole"
+    ).innerText =
+        user.role === "employee"
+        ? "Employee"
+        : "HR / Admin";
+
+
+    updateProfileUI();
+
+    updateAvatarUI();
+
+    updateAttendanceUI();
+
+    loadLeaves();
+
+    loadDocuments();
+
+    drawAttendanceGraphs();
+
+
+    if (user.role === "admin") {
+
+        document.getElementById(
+            "adminMenu"
+        ).style.display = "block";
+
+        loadEmployees();
+
+        loadApprovals();
+
+        updateReports();
+
+    } else {
+
+        document.getElementById(
+            "adminMenu"
+        ).style.display = "none";
+
+    }
+
+
+    showPage("dashboard");
+
+}
+
+
+/* =========================================================
+   PROFILE PHOTO
+========================================================= */
+
+function updateAvatarUI() {
+
+    const topAvatar =
+        document.getElementById(
+            "topAvatar"
+        );
+
+
+    if (
+        currentUser.photo
+    ) {
+
+        topAvatar.innerHTML =
+            `<img src="${currentUser.photo}">`;
+
+    } else {
+
+        topAvatar.innerText =
+            currentUser.name
+                .charAt(0)
+                .toUpperCase();
+
+    }
+
+}
+
+
+function updateProfileUI() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    document.getElementById(
+        "profileName"
+    ).innerText =
+        currentUser.name;
+
+
+    document.getElementById(
+        "profileFullName"
+    ).innerText =
+        currentUser.name;
+
+
+    document.getElementById(
+        "profileEmail"
+    ).innerText =
+        currentUser.email;
+
+
+    document.getElementById(
+        "profileEmployeeId"
+    ).innerText =
+        currentUser.employeeId;
+
+
+    document.getElementById(
+        "profileRole"
+    ).innerText =
+        currentUser.role === "employee"
+        ? "Employee"
+        : "HR / Admin";
+
+
+    document.getElementById(
+        "profileDepartment"
+    ).innerText =
+        currentUser.department || "Not Assigned";
+
+
+    document.getElementById(
+        "profileDesignation"
+    ).innerText =
+        currentUser.designation || "Not Assigned";
+
+
+    document.getElementById(
+        "joiningDate"
+    ).innerText =
+        currentUser.joiningDate;
+
+
+    const statusElement =
+        document.getElementById(
+            "accountStatus"
+        );
+
+
+    const accountButton =
+        document.getElementById(
+            "accountActionBtn"
+        );
+
+
+    const accountStatus =
+        currentUser.status || "Active";
+
+
+    statusElement.innerText =
+        accountStatus;
+
+
+    statusElement.className =
+        accountStatus === "Active"
+        ? "green"
+        : "red";
+
+
+    if (accountButton) {
+
+        accountButton.innerText =
+            accountStatus === "Active"
+            ? "Deactivate"
+            : "Activate";
+
+        accountButton.className =
+            accountStatus === "Active"
+            ? "btn btn-danger"
+            : "btn btn-success";
+
+    }
+
+
+    const photo =
+        document.getElementById(
+            "profilePhoto"
+        );
+
+
+    if (currentUser.photo) {
+
+        photo.innerHTML =
+            `<img src="${currentUser.photo}">`;
+
+    } else {
+
+        photo.innerText =
+            currentUser.name
+                .charAt(0)
+                .toUpperCase();
+
+    }
+
+}
+
+
+function saveCurrentUser() {
+
+    const index =
+        users.findIndex(
+            user =>
+                user.employeeId ===
+                currentUser.employeeId
+        );
+
+
+    if (index !== -1) {
+        users[index] = currentUser;
+    }
+
+
+    localStorage.setItem(
+        "dayflowUsers",
+        JSON.stringify(users)
+    );
+
+}
+
+
+function openJobDetailsModal() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    document.getElementById(
+        "jobDepartment"
+    ).value =
+        currentUser.department === "Not Assigned"
+        ? ""
+        : (currentUser.department || "");
+
+
+    document.getElementById(
+        "jobDesignation"
+    ).value =
+        currentUser.designation === "Not Assigned"
+        ? ""
+        : (currentUser.designation || "");
+
+
+    document.getElementById(
+        "jobDetailsModal"
+    ).style.display = "flex
