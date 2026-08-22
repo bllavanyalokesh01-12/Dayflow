@@ -3,41 +3,38 @@ Human Resource Management System
 
 Day flow is an intelligent, full-stack Human Resource Management System (HRMS) designed to streamline daily workforce operations for both employees and HR administrators. Moving beyond traditional HR record-keeping, Dayflow introduces Dayflow Intelligence—an explainable decision-support engine that analyzes organizational data, detects meaningful work patterns, and provides actionable recommendations to HR leaders while keeping final operational decisions strictly in human hands.
 
-👤 Employee Experience:
-Interactive Dashboard: Real-time view of daily attendance status, leave balances, pending requests, and monthly summary metrics.
+# Dayflow HRMS
 
-Attendance System: One-click Check-in and Check-out capabilities, working hours auto-calculation, and geo-location verification support.
+Dayflow HRMS is a simple web-based Human Resource Management System.
 
-Leave Management: Submit leave requests across multiple categories (Paid, Sick, Unpaid) with instant status tracking.
+## Features
 
-Payroll & Documents: View personal salary breakdowns (Basic, Allowances, Deductions, Net Salary) and manage personal profile details securely.
+- Employee and HR/Admin account creation
+- Login and logout
+- Employee profile management
+- Attendance tracking
+- Leave requests and approvals
+- Payroll and salary management
+- Document upload and management
+- Employee management
+- Account activation and deactivation
+- HR Copilot
 
-Employee AI Assistant: Self-service assistant answering personal HR queries regarding leave balances, salary summaries, and tenure.
+## Technologies Used
 
-🛡️ HR Command Center:
+- HTML
+- CSS
+- JavaScript
+- LocalStorage
 
-Workforce Analytics: High-level KPI dashboards showing attendance trends, department distributions, and pending action items.
+## How to Run
 
-Smart Leave Intelligence: Algorithmic evaluation of leave requests based on team availability, overlapping absences, and department capacity before approval.
+1. Download or clone the project.
+2. Open `index.html` in a web browser.
 
-HR Copilot: Conversational AI assistant capable of answering complex workforce queries using live database context.
+## GitHub Pages
 
-Employee Management: Comprehensive administrative control over employee profiles, designation updates, and salary structures.
+Upload the project to GitHub and enable GitHub Pages to run the application online.
 
-🔒 Security & Data Integrity:
-
-Row Level Security (RLS): Enforced directly at the database layer. Employees can only query their own personal data, while administrative actions require validated HR credentials.
-
-Audit Logging: Sensitive administrative tasks—such as leave approvals, payroll edits, and profile updates—are automatically recorded in immutable audit logs.
-
-Ethical AI Boundaries: Day flow Intelligence explicitly avoids medical, psychological, or performance labeling, utilizing only neutral, objective workplace metrics.
-
-🚀Unique Differentiators over Legacy HRMS:
-
-Contextual Role-Restricted AI Copilots: Queries live database records securely to answer natural language questions for both HR admins and employees.
-
-Capacity-Aware Leave Intelligence: Evaluates real-time team staffing, overlapping absences, and department workload before HR approves time off.
-
-Non-Invasive Workload & Wellbeing Tracking: Detects burnout risks using objective operational metrics (overtime, late check-ins, low leave usage) without invasive surveillance or productivity spyware.
-
+> Note: User data is stored in the browser using LocalStorage.
 
