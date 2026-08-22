@@ -3,7 +3,7 @@ Human Resource Management System
 
 Day flow is an intelligent, full-stack Human Resource Management System (HRMS) designed to streamline daily workforce operations for both employees and HR administrators. Moving beyond traditional HR record-keeping, Dayflow introduces Dayflow Intelligence—an explainable decision-support engine that analyzes organizational data, detects meaningful work patterns, and provides actionable recommendations to HR leaders while keeping final operational decisions strictly in human hands.
 
-👤 Employee Experience
+👤 Employee Experience:
 Interactive Dashboard: Real-time view of daily attendance status, leave balances, pending requests, and monthly summary metrics.
 
 Attendance System: One-click Check-in and Check-out capabilities, working hours auto-calculation, and geo-location verification support.
@@ -14,7 +14,7 @@ Payroll & Documents: View personal salary breakdowns (Basic, Allowances, Deducti
 
 Employee AI Assistant: Self-service assistant answering personal HR queries regarding leave balances, salary summaries, and tenure.
 
-🛡️ HR Command Center
+🛡️ HR Command Center:
 
 Workforce Analytics: High-level KPI dashboards showing attendance trends, department distributions, and pending action items.
 
@@ -24,7 +24,7 @@ HR Copilot: Conversational AI assistant capable of answering complex workforce q
 
 Employee Management: Comprehensive administrative control over employee profiles, designation updates, and salary structures.
 
-🔒 Security & Data Integrity
+🔒 Security & Data Integrity:
 
 Row Level Security (RLS): Enforced directly at the database layer. Employees can only query their own personal data, while administrative actions require validated HR credentials.
 
@@ -32,7 +32,7 @@ Audit Logging: Sensitive administrative tasks—such as leave approvals, payroll
 
 Ethical AI Boundaries: Day flow Intelligence explicitly avoids medical, psychological, or performance labeling, utilizing only neutral, objective workplace metrics.
 
-🚀Unique Differentiators over Legacy HRMS
+🚀Unique Differentiators over Legacy HRMS:
 
 Contextual Role-Restricted AI Copilots: Queries live database records securely to answer natural language questions for both HR admins and employees.
 
